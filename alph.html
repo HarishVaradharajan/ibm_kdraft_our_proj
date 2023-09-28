@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* CSS for the image grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 10px; /* Adjust the gap between images as needed */
+        }
+
+        /* CSS for individual images */
+        .image img {
+            width: 100%; /* Ensure that the image takes up the full width of its container */
+            height: 100%; /* Maintain the aspect ratio of the image */
+            object-fit: cover; /* Crop or expand the image to cover the entire container */
+        }
+        #alphabet-menu {
+            width: 100px;
+            background-color: #000000;
+            color: #fffdfd;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        #alphabet-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #ffffff;
+            transition: background-color 0.3s;
+        }
+
+        #alphabet-menu a:hover {
+            background-color: #6c6b6b;
+        }
+
+        #content {
+            margin-left: 120px; /* Adjust this value as needed */
+            padding: 20px;
+        }
+
+        .content-container {
+            margin-top: 20px; /* Adjust the top margin as needed */
+            margin-left: 120px; /* Adjust the left margin to create space to the right of the alphabet menu */
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .letter-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Style for the footer */
+        footer {
+            background-color: #000044; /* Updated background color */
+            color: #363636;
+            text-align: center;
+            padding: 20px; /* Increased padding for better spacing */
+        }
+
+        #page-header {
+            background-image: url("1500x500-twitter-header-28829-1024x341.jpg"); /* Replace with the path to your image */
+            background-size: cover; /* Adjust this to control the image size */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the image from repeating */
+            background-color: #000000;
+            color: #fff;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 500%;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Style for the contact information */
+        footer p {
+            font-size: 20px;
+            margin: 10px 0; /* Added margin for spacing between lines */
+        }
+
+        #para1 {
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            font-size: 60px; /* Apply animation to the header */
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        /* Animation for the header */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* New CSS for button underline animation */
+        #signupButton:hover::after,
+        #aboutButton:hover::after,
+        #homeButton:hover::after {
+            content: ''; /* Create an empty pseudo-element */
+            position: absolute;
+            left: 0;
+            bottom: -2px; /* Adjust the position of the underline */
+            width: 0; /* Initial width set to 0 */
+            height: 2px; /* Height of the underline */
+            background-color: #ffffff;
+            animation: underlineAnimation 0.3s ease-in-out forwards; /* Apply the animation on hover */
+        }
+
+        #signupButton:hover,
+        #aboutButton:hover,
+        #homeButton:hover {
+            background-color: rgba(0, 0, 0, 0);
+            color: #ffffff;
+            position: relative; /* Needed for absolute positioning of the ::after pseudo-element */
+            text-decoration: none; /* Remove the default underline */
+        }
+
+        #signupButton, #aboutButton, #homeButton {
+            background-color: rgba(0, 0, 0, 0);
+            color: rgba(255, 255, 255, 0.44);
+            border: 0px solid #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            float: right;
+            margin-right: 20px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Keyframes for the underline animation */
+        @keyframes underlineAnimation {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        img {
+            max-width: 200px; /* Adjust the maximum width of the images */
+            height: 300;
+            border-radius: 20px;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5); /* Add rounded edges to the images */
+        }
+        
+        .image-container {
+           
+            display: flex;
+            justify-content: space-between; /* Equal spacing between items */
+            align-items: center; /* Center-align items vertically */
+            margin: 30px; /* Add margin around the entire content */
+            flex-wrap: wrap;/* Add some spacing below the content */
+        }
+
+        /* Update styles for image-card to control the size and spacing of images */
+        .image-card {
+            flex: 0 0 auto; /* Prevent images from growing or shrinking */
+            margin-right: 20px; /* Add space between images (adjust as needed) */
+            position: relative; /* Added relative positioning */
+            cursor: pointer;
+            transition: transform 1s ease ease-in-out; /* Added transition for hover effect */
+        }
+
+        /* Styles for the image-name inside the image-card */
+        .image-card img {
+            max-width: 100%; /* Set the maximum width to 100% of the container */
+            height: 300px; /* Allow the height to adjust proportionally */
+            border-radius: 5%;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Styles for the image-name inside the image-card */
+        .image-card .image-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            color: #ffffff;
+            text-align: left;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Hover effect to show image name */
+        .image-card:hover .image-name {
+            opacity: 1;
+        }
+
+        /* Hover effect to scale image and add blur */
+        .image-card:hover img {
+            transform: scale(1.1);
+            filter: blur(4px);
+        }
+    </style>
+</head>
+<body>
+    <header id="page-header">
+        <div class="container">
+            <h1 class="page-title">MOVIES</h1>
+            <p class="page-subtitle">Select your movie's starting letter</p>
+<button id="signupButton" onclick="redirectToAbout()">About</button>
+<button id="signupButton" onclick="redirectToHome()">Home</button>
+        </div>
+    </header>
+    <div id="alphabet-menu">
+        <a href="letter-1.html" class="alphabet-link">1</a>
+        <a href="letter-a.html" class="alphabet-link">A</a>
+        <a href="letter-b.html" class="alphabet-link">B</a>
+        <a href="letter-c.html" class="alphabet-link">C</a>
+        <a href="letter-d.html" class="alphabet-link">D</a>
+        <a href="letter-e.html" class="alphabet-link">E</a>
+        <a href="letter-f.html" class="alphabet-link">F</a>
+        <a href="letter-g.html" class="alphabet-link">G</a>
+        <a href="letter-h.html" class="alphabet-link">H</a>
+        <a href="letter-i.html" class="alphabet-link">I</a>
+        <a href="letter-j.html" class="alphabet-link">J</a>
+        <a href="letter-k.html" class="alphabet-link">K</a>
+        <a href="letter-l.html" class="alphabet-link">L</a>
+        <a href="letter-m.html" class="alphabet-link">M</a>
+        <a href="letter-n.html" class="alphabet-link">N</a>
+        <a href="letter-o.html" class="alphabet-link">O</a>
+        <a href="letter-p.html" class="alphabet-link">P</a>
+        <a href="letter-q.html" class="alphabet-link">Q</a>
+        <a href="letter-r.html" class="alphabet-link">R</a>
+        <a href="letter-s.html" class="alphabet-link">S</a>
+        <a href="letter-t.html" class="alphabet-link">T</a>
+        <a href="letter-u.html" class="alphabet-link">U</a>
+        <a href="letter-v.html" class="alphabet-link">V</a>
+        <a href="letter-w.html" class="alphabet-link">W</a>
+    </div>
+
+    <!-- Add a new container for your content -->
+<div class="content-container">
+<div class="image-grid">
+<div class="image-card">
+    <img src="18 Again.jfif" alt="18 Again">
+    <div class="image-name">
+        <b>18 Again</b>
+    </div>
+</div>
+
+<!-- Image 2 -->
+<div class="image-card">
+    <img src="A Business Proposal.jfif" alt="A Business Proposal">
+    <div class="image-name">
+        <b>A Business Proposal</b>
+    </div>
+</div>
+
+<!-- Image 3 -->
+<div class="image-card">
+    <img src="Alchemy of Souls.jfif" alt="Alchemy of Souls">
+    <div class="image-name">
+        <b>Alchemy of Souls</b>
+    </div>
+</div>
+
+<!-- Image 4 -->
+<div class="image-card">
+    <img src="Alchemy of Souls 2 Light and Shadow.jfif" alt="Alchemy of Souls Season 2: Light and Shadow">
+    <div class="image-name">
+        <b>Alchemy of Souls Season 2: Light and Shadow</b>
+    </div>
+</div>
+
+<!-- Image 5 -->
+<div class="image-card">
+    <img src="Arthdal Chronicles 2 The Sky Turning Inside Out, Rising Land.jfif" alt="Arthdal Chronicles Part 2: The Sky Turning Inside Out, Rising Land">
+    <div class="image-name">
+        <b>Arthdal Chronicles Part 2: The Sky Turning Inside Out, Rising Land</b>
+    </div>
+</div>
+
+<!-- Image 6 -->
+<div class="image-card">
+    <img src="Arthdal Chronicles Part 3 The Prelude to All Legends.jfif" alt="Arthdal Chronicles Part 3: The Prelude to All Legends">
+    <div class="image-name">
+        <b>Arthdal Chronicles Part 3: The Prelude to All Legends</b>
+    </div>
+</div>
+
+<!-- Image 7 -->
+<div class="image-card">
+    <img src="Beyond Evil.jfif" alt="Beyond Evil">
+    <div class="image-name">
+        <b>Beyond Evil</b>
+    </div>
+</div>
+
+<!-- Image 8 -->
+<div class="image-card">
+    <img src="Big Mouth.jfif" alt="Big Mouth">
+    <div class="image-name">
+        <b>Big Mouth</b>
+    </div>
+</div>
+
+<!-- Image 9 -->
+<div class="image-card">
+    <img src="Chicago Typewriter.jfif" alt="Chicago Typewriter">
+    <div class="image-name">
+        <b>Chicago Typewriter</b>
+    </div>
+</div>
+
+<!-- Image 10 -->
+<div class="image-card">
+    <img src="Children of Nobody.jfif" alt="Children of Nobody">
+    <div class="image-name">
+        <b>Children of Nobody</b>
+    </div>
+</div>
+
+<!-- Image 11 -->
+<div class="image-card">
+    <img src="Crash Landing on You.jfif" alt="Crash Landing on You">
+    <div class="image-name">
+        <b>Crash Landing on You</b>
+    </div>
+</div>
+
+<!-- Image 12 -->
+<div class="image-card">
+    <img src="Cruel City.jfif" alt="Cruel City">
+    <div class="image-name">
+        <b>Cruel City</b>
+    </div>
+</div>
+
+<!-- Image 13 -->
+<div class="image-card">
+    <img src="D.P.jfif" alt="D.P.">
+    <div class="image-name">
+        <b>D.P.</b>
+    </div>
+</div>
+
+<!-- Image 14 -->
+<div class="image-card">
+    <img src="Dear My Friend.jfif" alt="Dear My Friends">
+    <div class="image-name">
+        <b>Dear My Friends</b>
+    </div>
+</div>
+
+<!-- Image 15 -->
+<div class="image-card">
+    <img src="Defendant.jfif" alt="Defendant">
+    <div class="image-name">
+        <b>Defendant</b>
+    </div>
+</div>
+
+<!-- Image 16 -->
+<div class="image-card">
+    <img src="Descendants of the Sun.jfif" alt="Descendants of the Sun">
+    <div class="image-name">
+        <b>Descendants of the Sun</b>
+    </div>
+</div>
+
+<!-- Image 17 -->
+<div class="image-card">
+    <img src="Designated Survivor_ 60 Days.jfif" alt="Designated Survivor: 60 Days">
+    <div class="image-name">
+        <b>Designated Survivor: 60 Days</b>
+    </div>
+</div>
+
+<!-- Image 18 -->
+<div class="image-card">
+    <img src="Dr. Romantic.jfif" alt="Dr. Romantic">
+    <div class="image-name">
+        <b>Dr. Romantic</b>
+    </div>
+</div>
+
+<!-- Image 19 -->
+<div class="image-card">
+    <img src="Dr. Romantic Season 2.jfif" alt="Dr. Romantic Season 2">
+    <div class="image-name">
+        <b>Dr. Romantic Season 2</b>
+    </div>
+</div>
+
+<!-- Image 20 -->
+<div class="image-card">
+    <img src="Empress Ki.jfif" alt="Empress Ki">
+    <div class="image-name">
+        <b>Empress Ki</b>
+    </div>
+</div>
+
+<!-- Image 21 -->
+<div class="image-card">
+    <img src="Eulachacha Waikiki.jfif" alt="Eulachacha Waikiki">
+    <div class="image-name">
+        <b>Eulachacha Waikiki</b>
+    </div>
+</div>
+
+<!-- Image 22 -->
+<div class="image-card">
+    <img src="Extraordinary Attorney Woo.jfif" alt="Extraordinary Attorney Woo">
+    <div class="image-name">
+        <b>Extraordinary Attorney Woo</b>
+    </div>
+</div>
+
+<!-- Image 23 -->
+<div class="image-card">
+    <img src="Flower of Evil.jfif" alt="Flower of Evil">
+    <div class="image-name">
+        <b>Flower of Evil</b>
+    </div>
+</div>
+
+<!-- Image 24 -->
+<div class="image-card">
+    <img src="Ghost Doctor.jfif" alt="Ghost Doctor">
+    <div class="image-name">
+        <b>Ghost Doctor</b>
+    </div>
+</div>
+
+<!-- Image 25 -->
+<div class="image-card">
+    <img src="Go Back Couple.jfif" alt="Go Back Couple">
+    <div class="image-name">
+        <b>Go Back Couple</b>
+    </div>
+</div>
+
+<!-- Image 26 -->
+<div class="image-card">
+    <img src="Goblin.jfif" alt="Goblin">
+    <div class="image-name">
+        <b>Goblin</b>
+    </div>
+</div>
+
+<!-- Image 27 -->
+<div class="image-card">
+    <img src="Good Manager.jfif" alt="Good Manager">
+    <div class="image-name">
+        <b>Good Manager</b>
+    </div>
+</div>
+
+<!-- Image 28 -->
+<div class="image-card">
+    <img src="Happiness.jfif" alt="Happiness">
+    <div class="image-name">
+        <b>Happiness</b>
+    </div>
+</div>
+
+<!-- Image 29 -->
+<div class="image-card">
+    <img src="Healer.jfif" alt="Healer">
+    <div class="image-name">
+        <b>Healer</b>
+    </div>
+</div>
+
+<!-- Image 30 -->
+<div class="image-card">
+    <img src="Hometown Cha-Cha-Cha.jfif" alt="Hometown Cha-Cha-Cha">
+    <div class="image-name">
+        <b>Hometown Cha-Cha-Cha</b>
+    </div>
+</div>
+
+<!-- Image 31 -->
+<div class="image-card">
+    <img src="Hospital Playlist.jfif" alt="Hospital Playlist">
+    <div class="image-name">
+        <b>Hospital Playlist</b>
+    </div>
+</div>
+
+<!-- Image 32 -->
+<div class="image-card">
+    <img src="Hospital Playlist Season 2.jfif" alt="Hospital Playlist Season 2">
+    <div class="image-name">
+        <b>Hospital Playlist Season 2</b>
+    </div>
+</div>
+
+<!-- Image 33 -->
+<div class="image-card">
+    <img src="Hot Stove League.jfif" alt="Hot Stove League">
+    <div class="image-name">
+        <b>Hot Stove League</b>
+    </div>
+</div>
+
+<!-- Image 34 -->
+<div class="image-card">
+    <img src="Hotel del Luna.jfif" alt="Hotel del Luna">
+    <div class="image-name">
+        <b>Hotel del Luna</b>
+    </div>
+</div>
+
+<!-- Image 35 -->
+<div class="image-card">
+    <img src="It's Okay to Not Be Okay.jfif" alt="It's Okay to Not Be Okay">
+    <div class="image-name">
+        <b>It's Okay to Not Be Okay</b>
+    </div>
+</div>
+
+<!-- Image 36 -->
+<div class="image-card">
+    <img src="It's Okay, That's Love.jfif" alt="It's Okay, That's Love">
+    <div class="image-name">
+        <b>It's Okay, That's Love</b>
+    </div>
+</div>
+
+<!-- Image 37 -->
+<div class="image-card">
+    <img src="Jewel in the Palace.jfif" alt="Jewel in the Palace">
+    <div class="image-name">
+        <b>Jewel in the Palace</b>
+    </div>
+</div>
+
+<!-- Image 38 -->
+<div class="image-card">
+    <img src="Juvenile Justice.jfif" alt="Juvenile Justice">
+    <div class="image-name">
+        <b>Juvenile Justice</b>
+    </div>
+</div>
+
+<!-- Image 39 -->
+<div class="image-card">
+    <img src="Kill Me, Heal Me.jfif" alt="Kill Me, Heal Me">
+    <div class="image-name">
+        <b>Kill Me, Heal Me</b>
+    </div>
+</div>
+
+<!-- Image 40 -->
+<div class="image-card">
+    <img src="Kingdom.jfif" alt="Kingdom">
+    <div class="image-name">
+        <b>Kingdom</b>
+    </div>
+</div>
+
+<!-- Image 41 -->
+<div class="image-card">
+    <img src="Kingdom Season 2.jfif" alt="Kingdom Season 2">
+    <div class="image-name">
+        <b>Kingdom Season 2</b>
+    </div>
+</div>
+
+<!-- Image 42 -->
+<div class="image-card">
+    <img src="Law School.jfif" alt="Law School">
+    <div class="image-name">
+        <b>Law School</b>
+    </div>
+</div>
+
+<!-- Image 43 -->
+<div class="image-card">
+    <img src="Life on Mars.jfif" alt="Life on Mars">
+    <div class="image-name">
+        <b>Life on Mars</b>
+    </div>
+</div>
+
+<!-- Image 44 -->
+<div class="image-card">
+    <img src="Little Women.jfif" alt="Little Women">
+    <div class="image-name">
+        <b>Little Women</b>
+    </div>
+</div>
+
+<!-- Image 45 -->
+<div class="image-card">
+    <img src="Live.jfif" alt="Live">
+    <div class="image-name">
+        <b>Live</b>
+    </div>
+</div>
+
+<!-- Image 46 -->
+<div class="image-card">
+    <img src="Love to Hate You.jfif" alt="Love to Hate You">
+    <div class="image-name">
+        <b>Love to Hate You</b>
+    </div>
+</div>
+
+<!-- Image 47 -->
+<div class="image-card">
+    <img src="Misaeng Incomplete Life.jfif" alt="Misaeng: Incomplete Life">
+    <div class="image-name">
+        <b>Misaeng: Incomplete Life</b>
+    </div>
+</div>
+
+<!-- Image 48 -->
+<div class="image-card">
+    <img src="Missing The Other Side.jfif" alt="Missing: The Other Side">
+    <div class="image-name">
+        <b>Missing: The Other Side</b>
+    </div>
+</div>
+
+<!-- Image 49 -->
+<div class="image-card">
+    <img src="Missing The Other Side 2.jfif" alt="Missing: The Other Side Season 2">
+    <div class="image-name">
+        <b>Missing: The Other Side Season 2</b>
+    </div>
+</div>
+
+<!-- Image 50 -->
+<div class="image-card">
+    <img src="Money Heist Korea.jfif" alt="Money Heist: Korea - Joint Economic Area - Part 2">
+    <div class="image-name">
+        <b>Money Heist: Korea - Joint Economic Area - Part 2</b>
+    </div>
+</div>
+
+<!-- Image 51 -->
+<div class="image-card">
+    <img src="Moon Lovers  Scarlet Heart Ryeo.jfif" alt="Moon Lovers: Scarlet Heart Ryeo">
+    <div class="image-name">
+        <b>Moon Lovers: Scarlet Heart Ryeo</b>
+    </div>
+</div>
+
+<!-- Image 52 -->
+<div class="image-card">
+    <img src="Mother.jfif" alt="Mother">
+    <div class="image-name">
+        <b>Mother</b>
+    </div>
+</div>
+
+<!-- Image 53 -->
+<div class="image-card">
+    <img src="Mouse.jfif" alt="Mouse">
+    <div class="image-name">
+        <b>Mouse</b>
+    </div>
+</div>
+
+<!-- Image 54 -->
+<div class="image-card">
+    <img src="Move to Heaven.jfif" alt="Move to Heaven">
+    <div class="image-name">
+        <b>Move to Heaven</b>
+    </div>
+</div>
+
+<!-- Image 55 -->
+<div class="image-card">
+    <img src="Mr. Queen.jfif" alt="Mr. Queen">
+    <div class="image-name">
+        <b>Mr. Queen</b>
+    </div>
+</div>
+
+<!-- Image 56 -->
+<div class="image-card">
+    <img src="Mr. Sunshine.jfif" alt="Mr. Sunshine">
+    <div class="image-name">
+        <b>Mr. Sunshine</b>
+    </div>
+</div>
+
+<!-- Image 57 -->
+<div class="image-card">
+    <img src="My Father Is Strange.jfif" alt="My Father Is Strange">
+    <div class="image-name">
+        <b>My Father Is Strange</b>
+    </div>
+</div>
+
+<!-- Image 58 -->
+<div class="image-card">
+    <img src="My Liberation Notes.jfif" alt="My Liberation Notes">
+    <div class="image-name">
+        <b>My Liberation Notes</b>
+    </div>
+</div>
+
+<!-- Image 59 -->
+<div class="image-card">
+    <img src="My Mister.jfif" alt="My Mister">
+    <div class="image-name">
+        <b>My Mister</b>
+    </div>
+</div>
+
+<!-- Image 60 -->
+<div class="image-card">
+    <img src="My Name.jfif" alt="My Name">
+    <div class="image-name">
+        <b>My Name</b>
+    </div>
+</div>
+
+<!-- Image 61 -->
+<div class="image-card">
+    <img src="Navillera.jfif" alt="Navillera">
+    <div class="image-name">
+        <b>Navillera</b>
+    </div>
+</div>
+
+<!-- Image 62 -->
+<div class="image-card">
+    <img src="Once Again.jfif" alt="Once Again">
+    <div class="image-name">
+        <b>Once Again</b>
+    </div>
+</div>
+
+<!-- Image 63 -->
+<div class="image-card">
+    <img src="Our Beloved Summer.jfif" alt="Our Beloved Summer">
+    <div class="image-name">
+        <b>Our Beloved Summer</b>
+    </div>
+</div>
+
+<!-- Image 64 -->
+<div class="image-card">
+    <img src="Our Blues.jfif" alt="Our Blues">
+    <div class="image-name">
+        <b>Our Blues</b>
+    </div>
+</div>
+
+<!-- Image 65 -->
+<div class="image-card">
+    <img src="Partners for Justice Season 2.jfif" alt="Partners for Justice Season 2">
+    <div class="image-name">
+        <b>Partners for Justice Season 2</b>
+    </div>
+</div>
+
+<!-- Image 66 -->
+<div class="image-card">
+    <img src="Prison Playbook.jfif" alt="Prison Playbook">
+    <div class="image-name">
+        <b>Prison Playbook</b>
+    </div>
+</div>
+
+<!-- Image 67 -->
+<div class="image-card">
+    <img src="Racket Boys.jfif" alt="Racket Boys">
+    <div class="image-name">
+        <b>Racket Boys</b>
+    </div>
+</div>
+
+<!-- Image 68 -->
+<div class="image-card">
+    <img src="Reborn Rich.jfif" alt="Reborn Rich">
+    <div class="image-name">
+        <b>Reborn Rich</b>
+    </div>
+</div>
+
+<!-- Image 69 -->
+<div class="image-card">
+    <img src="Reply 1988.jfif" alt="Reply 1988">
+    <div class="image-name">
+        <b>Reply 1988</b>
+    </div>
+</div>
+
+<!-- Image 70 -->
+<div class="image-card">
+    <img src="Signal.jfif" alt="Signal">
+    <div class="image-name">
+        <b>Signal</b>
+    </div>
+</div>
+
+<!-- Image 71 -->
+<div class="image-card">
+    <img src="Six Flying Dragons.jfif" alt="Six Flying Dragons">
+    <div class="image-name">
+        <b>Six Flying Dragons</b>
+    </div>
+</div>
+
+<!-- Image 72 -->
+<div class="image-card">
+    <img src="SKY Castle.jfif" alt="SKY Castle">
+    <div class="image-name">
+        <b>SKY Castle</b>
+    </div>
+</div>
+
+<!-- Image 73 -->
+<div class="image-card">
+    <img src="Stranger.jfif" alt="Stranger">
+    <div class="image-name">
+        <b>Stranger</b>
+    </div>
+</div>
+
+<!-- Image 74 -->
+<div class="image-card">
+    <img src="Stranger Season 2.jfif" alt="Stranger Season 2">
+    <div class="image-name">
+        <b>Stranger Season 2</b>
+    </div>
+</div>
+
+<!-- Image 75 -->
+<div class="image-card">
+    <img src="Strangers from Hell.jfif" alt="Strangers from Hell">
+    <div class="image-name">
+        <b>Strangers from Hell</b>
+    </div>
+</div>
+
+<!-- Image 76 -->
+<div class="image-card">
+    <img src="Strong Woman Do Bong Soon.jfif" alt="Strong Woman Do Bong Soon">
+    <div class="image-name">
+        <b>Strong Woman Do Bong Soon</b>
+    </div>
+</div>
+
+<!-- Image 77 -->
+<div class="image-card">
+    <img src="Sweet Home.jfif" alt="Sweet Home">
+    <div class="image-name">
+        <b>Sweet Home</b>
+    </div>
+</div>
+
+<!-- Image 78 -->
+<div class="image-card">
+    <img src="Taxi Driver.jfif" alt="Taxi Driver">
+    <div class="image-name">
+        <b>Taxi Driver</b>
+    </div>
+</div>
+
+<!-- Image 79 -->
+<div class="image-card">
+    <img src="The Bridal Mask.jfif" alt="The Bridal Mask">
+    <div class="image-name">
+        <b>The Bridal Mask</b>
+    </div>
+</div>
+
+<!-- Image 80 -->
+<div class="image-card">
+    <img src="The Devil Judge.jfif" alt="The Devil Judge">
+    <div class="image-name">
+        <b>The Devil Judge</b>
+    </div>
+</div>
+
+<!-- Image 81 -->
+<div class="image-card">
+    <img src="The Fiery Priest.jfif" alt="The Fiery Priest">
+    <div class="image-name">
+        <b>The Fiery Priest</b>
+    </div>
+</div>
+
+<!-- Image 82 -->
+<div class="image-card">
+    <img src="The First Responders.jfif" alt="The First Responders">
+    <div class="image-name">
+        <b>The First Responders</b>
+    </div>
+</div>
+
+<!-- Image 83 -->
+<div class="image-card">
+    <img src="The Glory.jfif" alt="The Glory">
+    <div class="image-name">
+        <b>The Glory</b>
+    </div>
+</div>
+
+<!-- Image 84 -->
+<div class="image-card">
+    <img src="The Glory 2.jfif" alt="The Glory Part 2">
+    <div class="image-name">
+        <b>The Glory Part 2</b>
+    </div>
+</div>
+
+<!-- Image 85 -->
+<div class="image-card">
+    <img src="The Guest.jfif" alt="The Guest">
+    <div class="image-name">
+        <b>The Guest</b>
+    </div>
+</div>
+
+<!-- Image 86 -->
+<div class="image-card">
+    <img src="The King of Pigs.jfif" alt="The King of Pigs">
+    <div class="image-name">
+        <b>The King of Pigs</b>
+    </div>
+</div>
+
+<!-- Image 87 -->
+<div class="image-card">
+    <img src="The Penthouse 2_ War In Life.jfif" alt="The Penthouse Season 2: War in Life">
+    <div class="image-name">
+        <b>The Penthouse Season 2: War in Life</b>
+    </div>
+</div>
+
+<!-- Image 88 -->
+<div class="image-card">
+    <img src="The Penthouse_ war in life.jfif" alt="The Penthouse: War in Life">
+    <div class="image-name">
+        <b>The Penthouse: War in Life</b>
+    </div>
+</div>
+
+<!-- Image 89 -->
+<div class="image-card">
+    <img src="The Red Sleeve.jfif" alt="The Red Sleeve">
+    <div class="image-name">
+        <b>The Red Sleeve</b>
+    </div>
+</div>
+
+<!-- Image 90 -->
+<div class="image-card">
+    <img src="The Uncanny Counter.jfif" alt="The Uncanny Counter">
+    <div class="image-name">
+        <b>The Uncanny Counter</b>
+    </div>
+</div>
+
+<!-- Image 91 -->
+<div class="image-card">
+    <img src="Through the Darkness.jfif" alt="Through the Darkness">
+    <div class="image-name">
+        <b>Through the Darkness</b>
+    </div>
+</div>
+
+<!-- Image 92 -->
+<div class="image-card">
+    <img src="Tomorrow.jfif" alt="Tomorrow">
+    <div class="image-name">
+        <b>Tomorrow</b>
+    </div>
+</div>
+
+<!-- Image 93 -->
+<div class="image-card">
+    <img src="Tunnel.jfif" alt="Tunnel">
+    <div class="image-name">
+        <b>Tunnel</b>
+    </div>
+</div>
+
+<!-- Image 94 -->
+<div class="image-card">
+    <img src="Twenty Five Twenty One.jfif" alt="Twenty-Five Twenty-One">
+    <div class="image-name">
+        <b>Twenty-Five Twenty-One</b>
+    </div>
+</div>
+
+<!-- Image 95 -->
+<div class="image-card">
+    <img src="Under the Queen Umbrella.jfif" alt="Under the Queen's Umbrella">
+    <div class="image-name">
+        <b>Under the Queen's Umbrella</b>
+    </div>
+</div>
+
+<!-- Image 96 -->
+<div class="image-card">
+    <img src="Vincenzo.jfif" alt="Vincenzo">
+    <div class="image-name">
+        <b>Vincenzo</b>
+    </div>
+</div>
+
+<!-- Image 97 -->
+<div class="image-card">
+    <img src="Weak Hero Class 1.jfif" alt="Weak Hero Class 1">
+    <div class="image-name">
+        <b>Weak Hero Class 1</b>
+    </div>
+</div>
+
+<!-- Image 98 -->
+<div class="image-card">
+    <img src="Weight lifting fairy kim bokjoo.jfif" alt="Weightlifting Fairy Kim Bok Joo">
+    <div class="image-name">
+        <b>Weightlifting Fairy Kim Bok Joo</b>
+    </div>
+</div>
+
+<!-- Image 99 -->
+<div class="image-card">
+    <img src="While You Were Sleeping.jfif" alt="While You Were Sleeping">
+    <div class="image-name">
+        <b>While You Were Sleeping</b>
+    </div>
+</div>
+
+<!-- Image 100 -->
+<div class="image-card">
+    <img src="Youth of May.jfif" alt="Youth of May">
+    <div class="image-name">
+        <b>Youth of May</b>
+    </div>
+</div>
+</div>
+<!-- Continue this pattern for more images -->
+
+            <!-- Add more image-card elements for additional images -->
+        </div>
+    </div>
+    <script>
+        function redirectToSignup() {
+            window.location.href = "signup.html";
+        }
+        function redirectToAbout() {
+            window.location.href = "about.html";
+        }
+        function redirectToHome() {
+            window.location.href = "home.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+      <!-- Other head elements -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+oNx5EN3O1Vnn6s2Eqf3z5u/Op+5zHRZNT5F5r5B5Mee5n5r" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+QVdObKvuh8okpNqs5sR7v5rdzZl2+jW5f8r0XvXp0p4f2zQ" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#signupButton { 
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255); 
+    border: none; 
+    padding: 20px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+    margin-right: 20px;
+}
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+/* Hide all slides initially */
+.mySlides {
+    display: none;
+}
+/* Style for the footer */
+footer {
+    background-color: #000044; /* Updated background color */
+    color: #363636;
+    text-align: center;
+    padding: 20px; /* Increased padding for better spacing */
+}
+/* Styling for the header */
+#page-header {
+    background-image: url("1500x500-twitter-header-28829-1024x341.jpg"); /* Replace with the path to your image */
+    background-size: cover; /* Adjust this to control the image size */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-color: #000000;
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+
+.page-title {
+  font-size: 36px;
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 500%;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Style for the contact information */
+footer p {
+    font-size: 20px;
+    margin: 10px 0; /* Added margin for spacing between lines */
+}
+
+/* Style for Font Awesome icons */
+.fa {
+    font-size: 24px; /* Adjust the icon size as needed */
+    margin-right: 8px; /* Add spacing between icons and text */
+}
+
+/* Style for the copyright notice */
+footer .copyright {
+    font-size: 14px; /* Adjust the font size for the copyright notice */
+}
+
+/* Apply border-radius to all images and set fixed dimensions */
+img {
+    vertical-align: middle;
+    border-radius: 15px;
+    width: 500px; /* Set the desired width for your images */
+    height: 500px; /* Set the desired height for your images */
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Caption text */
+.text {
+    color: #000000;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #000000;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+/* CSS for the top-left image */
+.top-left-image {
+  position: absolute;
+  top: -100px; /* Initial position outside the viewport */
+  left: 10px;
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Maintain aspect ratio */
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 20%; /* Make the image circular */
+}
+
+/* Animation for sliding in the top-left image */
+[data-aos="slide-in"] {
+  transition: top 1s ease-in-out;
+}
+[data-aos="slide-in"].aos-animate {
+  top: 10px; /* Final position */
+}
+
+/* Styling for the creators' section */
+.creators-section {
+  background-color: #f9f9f9;
+  padding: 50px 0;
+}
+
+.creator-item {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.creator-item img {
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.creator-item h2 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.creator-item p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* The dots/bullets/indicators */
+
+
+.active {
+    background-color: #524747;
+}
+#animationText {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  font-family: "Helvetica", sans-serif;
+  color: #000000;
+  padding: 20px;
+}
+.separator {
+    width: 20px; /* Adjust the width as needed */
+    height: 2px; /* Adjust the height as needed */
+    background-color: #bbb;
+    display: inline-block;
+    margin: 0 2px; /* Adjust the spacing as needed */
+    position: relative;
+    animation: pulsate 2s infinite; /* Add pulsating animation to separators */
+}
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2); /* Scale the separator up */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.active {
+    background-color: #717171;
+}
+@keyframes slide {
+    0% {
+        transform: translateX(100%); /* Start from the right margin */
+    }
+    100% {
+        transform: translateX(-100%); /* Move to the left margin */
+    }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Styling for the stats section */
+#stats-counter {
+  background-color: #f4f4f4;
+  padding: 50px 0;
+}
+
+.stats-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stats-item p {
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+/* Animation for the stats counters */
+.stats-item .purecounter {
+  font-size: 36px;
+  color: #000000;
+  font-weight: bold;
+  transition: transform 1s;
+}
+
+/* Animation effect when counters appear on the screen */
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Fading animation */
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+/* Animation for the header */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+#signupButton, #homeButton {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 0.44);
+    border: 0px solid #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    float: right;
+    margin-right: 20px;
+    
+    transition: transform 0.2s ease-in-out;
+}
+.custom-font {
+  font-family: "Helvetica", sans-serif;
+}
+/* Define a keyframes animation for the underline */
+@keyframes underlineAnimation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+#signupButton:hover, #homeButton:hover {
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
+    position: relative; /* Needed for absolute positioning of the ::after pseudo-element */
+    text-decoration: none; /* Remove the default underline */
+}
+
+#signupButton:hover::after,
+#homeButton:hover::after {
+    content: ''; /* Create an empty pseudo-element */
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Adjust the position of the underline */
+    width: 0; /* Initial width set to 0 */
+    height: 2px; /* Height of the underline */
+    background-color: #ffffff;
+    animation: underlineAnimation 0.3s ease-in-out forwards; /* Apply the animation on hover */
+}
+
+
+#para1 {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 60px; /* Apply animation to the header */
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#para2 {
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 30px; /* Apply animation to the header */
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .text {font-size: 11px}
+}
+/* Styling for the creators' section */
+.creators-section {
+  background-color: #f9f9f9;
+  padding: 50px 0;
+}
+
+/* Style for the creator items */
+/* Style for the creator items with rounded edges */
+.creator-item {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially hidden */
+  transform: translateY(50px); /* Initially positioned below */
+  transition: opacity 1s ease, transform 1s ease; /* Animation properties */
+  border-radius: 10px; /* Rounded edges */
+}
+
+.creator-item h2 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+.grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 25px;
+        }
+
+        .container1 {
+            background-color: rgb(206, 197, 197);
+            color: rgb(0, 0, 0);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+            text-align: justify;
+            padding: 20px;
+        }
+
+        .container h2 {
+            font-size: 36px; /* Increase the font size for the heading */
+        }
+
+        .container p {
+            font-size: 20px; /* Increase the font size for the content */
+        }
+.creator-item p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Apply the animations */
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation for the header */
+[data-aos="slide-in"] {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+[data-aos="slide-in"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* CSS for the paragraph with image */
+.paragraph-with-image {
+  display: flex;
+  justify-content: space-between; /* Separate paragraph and image */
+  align-items: center; /* Vertically center content */
+}
+
+.paragraph-content {
+  flex: 1; /* Allow paragraph to take available space */
+}
+
+.image-container img {
+  max-width: 100%; /* Ensure the image does not exceed its container */
+  height: auto; /* Maintain aspect ratio */
+}
+/* Styling for the FAQ section */
+/* Style for FAQ items */
+.faq-item {
+  background-color: #fff;
+  padding: 15px; /* Reduce padding */
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Add position for the arrow */
+}
+
+/* FAQ item arrow */
+.faq-item::after {
+  /* Unicode arrow down character */
+  font-size: 18px;
+  position: absolute;
+  top: 10px; /* Adjust vertical position as needed */
+  right: 10px; /* Adjust horizontal position as needed */
+}
+
+.faq-item h3 {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Animation for FAQ items */
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Apply animation when FAQ items appear on the screen */
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+@keyframes rollNumbers {
+  from {
+    transform: translateY(20px); /* Start from a higher position */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); /* Roll down to the original position */
+    opacity: 1;
+  }
+}
+
+.stats-item .purecounter.rolling {
+  animation: rollNumbers 1s ease-out; /* Adjust the duration as needed */
+}
+
+</style>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=FontName">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    
+        
+        <header id="page-header" data-aos="slide-in">
+            <div class="container">
+              <h1 class="page-title">ABOUT</h1>
+              <p class="page-subtitle">The dream of all kdrama fans</p>
+              <button id="signupButton" onclick="redirectToSignup()">Signup</button>
+<button id="signupButton" onclick="redirectToAbout()">About</button>
+<button id="signupButton" onclick="redirectToHome()">Home</button>
+            </div>
+          </header>
+          <br>
+          
+        </header>
+      
+        <img src="Black White Minimalist Logo.png" alt="Image" class="top-left-image" data-aos="slide-in">
+        <br><br>
+
+  
+<div class="slideshow-container">
+
+<div class="mySlides">
+    <img src="1.jfif" style="width:100%">
+</div>
+
+<div class="mySlides">
+    <img src="2.jpg" style="width:100%">
+</div>
+
+<div class="mySlides">
+    <img src="3.jfif" style="width:100%">
+</div>
+
+<div class="mySlides">
+    <img src="4.jfif" style="width:100%">
+</div>
+
+<div class="mySlides">
+    <img src="5.jfif" style="width:100%">
+</div>
+<div class="mySlides">
+    <img src="6.jfif" style="width:100%">
+</div>
+<div class="mySlides">
+    <img src="7.jfif" style="width:100%">
+</div>
+<div class="mySlides">
+    <img src="8.jfif" style="width:100%">
+</div>
+</div>
+<br>
+<div style="text-align:center">
+    <span class="separator"></span>
+    <span class="separator"></span>
+    <span class="separator"></span>
+    <span class="separator"></span>
+    <span class="separator"></span>
+    <span class="separator"></span>
+    <span class="separator"></span>
+    <span class="separator"></span>
+  
+  </div>
+  <br>
+  <div class="grid-container">
+    <div class="container1">
+        <h2>Korean drama 한국 드라마</h2>
+        <p>"K-dramas," have become a global entertainment phenomenon known for their unique storytelling,
+          compelling characters, and high production quality. These television series originate from South Korea and cover a wide range of genres,
+          including romance, drama, comedy, fantasy, thriller, and historical fiction. What sets K-dramas apart is their ability to delve deep into 
+          emotions, relationships, and cultural contexts, providing viewers with a captivating and immersive experience.</div>
+    <div class="container1">
+        <h2>MISSION</h2>
+        <p> Your mission is to explore K-Drama websites, thoroughly examine their content variety, user interface, subscription models, 
+          exclusive offerings, community features, subtitles, streaming quality, device compatibility, search functionality, legal compliance, 
+          user reviews, region-specific availability, download options, customer support, and security measures.</div>
+    <div class="container1">
+        <h2>VISSION STATEMENT</h2>
+        <p> "To be the premier online destination for K-Drama enthusiasts, where we foster a global community of passionate viewers, celebrate the rich storytelling and cultural diversity of Korean dramas, and provide a one-of-a-kind immersive experience that transcends borders."</div>
+    <div class="container1">
+        <h2>PREMIER DESTINATION</h2>
+        <p>The website aims to be the go-to platform for K-Drama fans, signifying excellence and reliability in delivering content and services.
+        </div>
+    <div class="container1">
+        <h2>GLOBAL COMMUNITY</h2>
+        <p>The vision acknowledges the importance of building a global community of K-Drama enthusiasts, emphasizing inclusivity and diversity among its users. </div>
+    <div class="container1">
+        <h2>CELEBRATION OF K-DRAMA</h2>
+        <p> The website intends to celebrate the art of Korean drama, recognizing it as a unique form of storytelling and cultural expression.</div>
+    <div class="container1">
+        <h2>CULTURAL DIVERSITY</h2>
+        <p>The vision highlights the appreciation of the cultural diversity showcased in Korean dramas, which can include various genres, themes, and historical contexts.</p>
+    </div>
+    <div class="container1">
+        <h2>IMMERSIVE EXPERIENCE</h2>
+        <p> The website aims to provide an immersive experience for users, going beyond simple content delivery to engage viewers deeply in the world of K-Dramas.</p>
+    </div>
+    <div class="container1">
+        <h2>TRANSCENDING BORDERS</h2>
+        <p> By emphasizing the transcending of borders, the vision indicates a commitment to making K-Drama accessible and enjoyable for viewers from all around the world.
+        </div>
+</div>
+  </div>
+  <br>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include AOS library -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.faq-item').click(function () {
+      $(this).toggleClass('open').find('p').slideToggle(300);
+    });
+  });
+</script>
+
+<script>
+  // Initialize AOS library
+  AOS.init();
+</script>
+
+<script>
+  // Initialize AOS library
+  AOS.init();
+</script>
+
+<script>
+  // Initialize AOS library
+  AOS.init();
+
+  // Function to start the counters
+  function startCounters() {
+    const counters = document.querySelectorAll('.purecounter');
+    const duration = 2000; // Duration of the counting animation in milliseconds
+
+    counters.forEach(counter => {
+      const endValue = parseInt(counter.getAttribute('data-purecounter-end'));
+      const startValue = parseInt(counter.getAttribute('data-purecounter-start'));
+      const stepValue = endValue / (duration / 1000);
+
+      let currentValue = startValue;
+      const updateCounter = () => {
+        if (currentValue < endValue) {
+          currentValue += stepValue;
+          counter.textContent = Math.round(currentValue);
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = endValue;
+        }
+      };
+
+      updateCounter();
+    });
+  }
+
+  // Trigger the counters when the section is scrolled into view
+  window.addEventListener('scroll', () => {
+    const section = document.getElementById('stats-counter');
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    if (rect.top < windowHeight && rect.bottom >= 0) {
+      startCounters();
+      window.removeEventListener('scroll', startCounters);
+    }
+  });
+</script>
+
+      <section id="stats-counter" class="stats-counter pt-0">
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+    
+          <div class="row gy-4">
+    
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="100" data-purecounter-duration="0" class="purecounter">100</span>
+                <p>Total No Of Dramas</p>
+              </div>
+            </div><!-- End Stats Item -->
+    
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="0" class="purecounter">24</span>
+                <p>Total Genre</p>
+              </div>
+            </div><!-- End Stats Item -->
+    
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="800" data-purecounter-duration="0" class="purecounter">800</span>
+                <p>No Of Mainrole</p>
+              </div>
+            </div><!-- End Stats Item -->
+    
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="284124" data-purecounter-duration="0" class="purecounter">284124</span>
+                <p>Watchers</p>
+              </div>
+            </div><!-- End Stats Item -->
+    
+          </div>
+    
+        </div>
+      </section><br>
+      <section id="faqs" class="faq-section">
+        <div class="container">
+          <h3>Frequently Asked Questions</h3><br>
+          <div class="faq-item" data-aos="fade-up">
+            <h3 class="faq-question">Question 1: What is the purpose of this K-drama website?</h3>
+            <p class="faq-answer">Answer 1: This question helps define the website's goals, whether it's for providing information, reviews, streaming services, or community discussions.</p>
+            <i class="fas fa-plus-circle fa-lg toggle-icon"></i>
+          </div>
+          <div class="faq-item" data-aos="fade-up">
+            <h3 class="faq-question">Question 2: How can I watch K-dramas on this website?</h3>
+            <p class="faq-answer">Answer 2: Users often want to know if the website offers streaming services, direct downloads, or links to other platforms where they can watch K-dramas.</p>
+            <i class="fas fa-plus-circle fa-lg toggle-icon"></i>
+          </div>
+          <div class="faq-item" data-aos="fade-up">
+            <h3 class="faq-question">Question 3: Do you have a K-drama release schedule?</h3>
+            <p class="faq-answer">Answer 3: Users may want to know when their favorite K-dramas are airing or when new episodes will be released.</p>
+            <i class="fas fa-plus-circle fa-lg toggle-icon"></i>
+          </div>
+          <div class="faq-item" data-aos="fade-up">
+            <h3 class="faq-question">Question 4: Who are the website's primary contributors or reviewers?</h3>
+            <p class="faq-answer">Answer 4: Users might be interested in knowing the people behind the website's content and their qualifications or expertise in K-dramas.</p>
+            <i class="fas fa-plus-circle fa-lg toggle-icon"></i>
+          </div>
+        </div>
+      </section>
+      
+      </section>
+      
+      
+      <section id="creators" class="creators-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="creator-item" data-aos="fade-up">
+                <h2>Krishna</h2>
+                <p>Web Developer</p>
+                <div class="social-icons">
+                  <a href="https://www.instagram.com/kris.ofcl/" target="_blank"><i class="fab fa-instagram" style="color: #e4405f; font-size: 24px;"></i></a>
+                  <p class="phone-number"><i class="fas fa-phone-alt" style="color: #000000; font-size: 24px;"></i> +91 6374611826</p>
+                  </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="creator-item" data-aos="fade-up">
+                <h2>Yuvashree</h2>
+                <p>Web Developer</p>
+                <div class="social-icons">
+                  <a href="https://www.instagram.com/yuvashree.sugumar/" target="_blank"><i class="fab fa-instagram" style="color: #e4405f; font-size: 24px;"></i></a>
+                  
+
+                  <p class="phone-number"><i class="fas fa-phone-alt" style="color: #000000; font-size: 24px;"></i> +91 9043179195</p>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-lg-6">
+              <div class="creator-item" data-aos="fade-up">
+                <h2>Harish</h2>
+                <p>Web Developer</p>
+                <div class="social-icons">
+                  <a href="https://www.instagram.com/harishvaradharajan007/" target="_blank"><i class="fab fa-instagram" style="color: #e4405f; font-size: 24px;"></i></a>
+                 
+
+
+                  <p class="phone-number"><i class="fas fa-phone-alt" style="color: #000000; font-size: 24px;"></i> +91 9087106267</p>
+                  </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="creator-item" data-aos="fade-up">
+                <h2>Nivedha</h2>
+                <p>Web Developer</p>
+                <div class="social-icons">
+                  <a href="https://www.instagram.com/nivedha_0807/" target="_blank"><i class="fab fa-instagram" style="color: #e4405f; font-size: 24px;"></i></a>
+                  
+                  <p class="phone-number"><i class="fas fa-phone-alt" style="color: #000000; font-size: 24px;"></i> +91 9345334693</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      
+      <footer style="background-color: rgb(104, 104, 104); color: #3a3a3a; text-align: center; padding: 10px;">
+        <div style="font-size: 20px;">
+            <p><i class="fas fa-envelope"></i> Contact us:</p>
+            <p>
+                <br>
+                <footer style="background-color: #000000; color: #988383; text-align: left; padding: 20px;">
+                    <div style="font-size: 20px;">
+                        <p><i class="fas fa-map-marker-alt"></i> Address:</p>
+                        <p>
+                            Namakkal to Karur highway<br>
+                            Thalavapalayam<br>
+                        </p>
+                        <p><i class="fas fa-phone"></i> Phone: 05231-228019</p>
+                        <p><i class="fas fa-envelope"></i> Email: KDraft@gmail.com</p>
+                    </div>
+                </footer>
+            </p>
+        </div>
+    </footer>
+    
+
+            
+    
+<script>
+    $(document).ready(function () {
+  // Initially hide all answers
+  $('.faq-answer').hide();
+
+  // Toggle answers and icons when a question is clicked
+  $('.faq-question').click(function () {
+    const answer = $(this).next('.faq-answer');
+    const icon = $(this).siblings('.toggle-icon');
+    const isHidden = answer.is(':hidden'); // Check if the answer is currently hidden
+
+    if (isHidden || answer.hasClass('opened')) {
+      // If the answer is hidden or has 'opened' class, show it, change the icon to minus, and add 'opened' class
+      answer.slideDown(300).addClass('opened');
+      icon.removeClass('fa-plus-circle').addClass('fa-minus-circle');
+    } else {
+      // If the answer is visible and doesn't have 'opened' class, hide it, change the icon to plus
+      answer.slideUp(300).removeClass('opened');
+      icon.removeClass('fa-minus-circle').addClass('fa-plus-circle');
+    }
+  });
+});
+
+
+
+let slideIndex = 0;
+showSlides();
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let separator = document.getElementsByClassName("separator");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    for (i = 0; i < separator.length; i++) {
+        separator[i].className = separator[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    separator[slideIndex-1].className += " active";
+    setTimeout(showSlides,2000); // Change image every 2 seconds (adjust this value)
+}
+function redirectToSignup() {
+    window.location.href = "signup.html";
+}
+function redirectToAbout() {
+    window.location.href = "about.html";
+}
+function redirectToHome() {
+    window.location.href = "home.html";
+}
+
+  // Function to start the counting animation
+  function startCountingAnimation() {
+    $('.purecounter').each(function () {
+      const endValue = parseInt($(this).data('purecounter-end'));
+      $(this).prop('Counter', 0).animate(
+        {
+          Counter: endValue,
+        },
+        {
+          duration: 2000, // Animation duration in milliseconds
+          easing: 'swing', // Easing function for smoother animation
+          step: function (now) {
+            // Update the text with the current value
+            $(this).text(Math.ceil(now));
+          },
+        }
+      );
+    });
+  }
+
+
+  // Start the counting animation when the document is ready
+  $(document).ready(function () {
+    startCountingAnimation();
+  });
+  function startCounters() {
+  const counters = document.querySelectorAll('.purecounter');
+  const duration = 2000; // Duration of the counting animation in milliseconds
+
+  counters.forEach(counter => {
+    const endValue = parseInt(counter.getAttribute('data-purecounter-end'));
+    const startValue = parseInt(counter.getAttribute('data-purecounter-start'));
+    const stepValue = endValue / (duration / 1000);
+
+    let currentValue = startValue;
+    const updateCounter = () => {
+      if (currentValue < endValue) {
+        currentValue += stepValue;
+        counter.textContent = Math.round(currentValue);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = endValue;
+        counter.classList.add('rolling'); // Add the rolling animation class
+      }
+    };
+
+    updateCounter();
+  });
+}
+
+// Trigger the counters when the section is scrolled into view
+window.addEventListener('scroll', () => {
+  const section = document.getElementById('stats-counter');
+  const rect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  if (rect.top < windowHeight && rect.bottom >= 0) {
+    startCounters();
+    window.removeEventListener('scroll', startCounters);
+  }
+});
+
+
+</script>
+</body>
+</html>
